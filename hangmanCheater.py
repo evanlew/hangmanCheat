@@ -43,8 +43,11 @@ class HangmanCheater(object):
 		if not len(pattern) == len(word):
 			return False
 		for wordChar, patternChar in zip(word, pattern):
-			if patternChar == "_": 
-				continue
+			if patternChar == "_":
+				if wordChar in pattern:
+					return False
+				else:
+					continue
 			elif patternChar == wordChar:
 				continue
 			else:
