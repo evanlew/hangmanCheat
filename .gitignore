@@ -14,7 +14,7 @@
 
 # Vim creates swapfiles for open files; ignore these
 .*.swp
-
+.*.swo
 #
 # Python
 #
