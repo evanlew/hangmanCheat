@@ -1,14 +1,23 @@
 import os,sys
 import re
+import string
 
 class HangmanCheater(object):
 	def __init__(self, dictionary, patternInitial=None, impossibleCharsInitial=None):
 		self.dictionary = dictionary
-		self.pattern = patternInitial
-		self.impossibleChars = impossibleCharsInitial
+		if patternInitial == None:
+			self.pattern = []
+		else:
+			self.pattern = patternInitial
+		if impossibleCharsInitial == None:
+			self.impossibleChars = []
+		else:
+			self.impossibleChars = impossibleCharsInitial
+
+
 
 	def updatePattern(self, newPattern):
-		if re.search(newPatter, "!^[a-z_]+$"):
+		if re.search(newPattern, "!^[a-z_]+$"):
 			raise VauleError("Not a valid pattern. Patterns must only contain lowercase letters and underscores")
 		else:
 			self.pattern = newPattern
@@ -54,11 +63,24 @@ if __name__ == '__main__':
 	#grab dictionary
 	DICTPATH = "resources/dictionaries/master.txt"
 	wordlist = open(DICTPATH,"r").read().split("\n")
-
-	#Ask for pattern and blacklisted chars
-	notLetters = list(raw_input("What letters are not in the word: "))
-	pattern = raw_input("Enter current know letters and blanks: ")
 	
-	hangmanGame = HangmanCheater(wordlist,pattern,notLetters)
-	print hangmanGame.getPossibilities()
+	def printPossibilities(possibilities):
+		for word in possibilities:
+			print word
+
+	pattern = raw_input("Enter pattern: ")
+	hangmanGame = HangmanCheater(wordlist)
+
+	while True:
+		option = raw_input("1) Blacklist character\n2) Update pattern\n: ")
+		if option == "1":
+			char = raw_input("Enter character to blacklist: ")
+			hangmanGame.addImpossibleChar(char)
+		elif option == "2":
+			pattern = raw_input("Enter new pattern: ")
+			hangmanGame.updatePattern(pattern)
+		else:
+			break
+		printPossibilities(hangmanGame.getPossibilities())
+
 
