@@ -72,7 +72,7 @@ if __name__ == '__main__':
 			print word
 
 	pattern = raw_input("Enter pattern: ")
-	hangmanGame = HangmanCheater(wordlist)
+	hangmanGame = HangmanCheater(wordlist, pattern)
 
 	while True:
 		option = raw_input("1) Blacklist character\n2) Update pattern\n: ")
@@ -84,6 +84,7 @@ if __name__ == '__main__':
 			hangmanGame.updatePattern(pattern)
 		else:
 			break
+
 		printPossibilities(hangmanGame.getPossibilities())
 
 
