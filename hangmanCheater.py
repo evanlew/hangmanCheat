@@ -17,7 +17,7 @@ class HangmanCheater(object):
 
 
 	def updatePattern(self, newPattern):
-		if re.search(newPattern, "!^[a-z_]+$"):
+		if not re.match("^[a-z|_]+$", newPattern):
 			raise VauleError("Not a valid pattern. Patterns must only contain lowercase letters and underscores")
 		else:
 			self.pattern = newPattern
