@@ -5,14 +5,16 @@ import string
 class HangmanCheater(object):
 	def __init__(self, dictionary, patternInitial=None, impossibleCharsInitial=None):
 		self.dictionary = dictionary
+
 		if patternInitial == None:
 			self.pattern = []
 		else:
-			self.pattern = patternInitial
+			self.updatePattern(patternInitial)
+
 		if impossibleCharsInitial == None:
 			self.impossibleChars = []
 		else:
-			self.impossibleChars = impossibleCharsInitial
+			self.addImpossibleChar(impossibleCharsInitial)
 
 
 
