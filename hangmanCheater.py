@@ -16,8 +16,6 @@ class HangmanCheater(object):
 		else:
 			self.addImpossibleChar(impossibleCharsInitial)
 
-
-
 	def updatePattern(self, newPattern):
 		if not re.match("^[a-z|_]+$", newPattern):
 			raise VauleError("Not a valid pattern. Patterns must only contain lowercase letters and underscores")
@@ -40,7 +38,6 @@ class HangmanCheater(object):
 				possibleWords.append(word)
 		return possibleWords
 
-
 	def __isPossible(self, pattern, word):
 		if not len(pattern) == len(word):
 			return False
@@ -56,37 +53,8 @@ class HangmanCheater(object):
 				return False
 		return True
 	
-	
 	def __stringContainsAny(self, str, chars):
 		for char in chars:
 			if char in str:
 				return True
 		return False
-
-
-if __name__ == '__main__':
-	#grab dictionary
-	DICTPATH = "resources/dictionaries/master.txt"
-	wordlist = open(DICTPATH,"r").read().split("\n")
-	
-	def printPossibilities(possibilities):
-		for word in possibilities:
-			print word
-
-	pattern = raw_input("Enter pattern: ")
-	hangmanGame = HangmanCheater(wordlist, pattern)
-
-	while True:
-		option = raw_input("1) Blacklist character\n2) Update pattern\n: ")
-		if option == "1":
-			char = raw_input("Enter character to blacklist: ")
-			hangmanGame.addImpossibleChar(char)
-		elif option == "2":
-			pattern = raw_input("Enter new pattern: ")
-			hangmanGame.updatePattern(pattern)
-		else:
-			break
-
-		printPossibilities(hangmanGame.getPossibilities())
-
-
