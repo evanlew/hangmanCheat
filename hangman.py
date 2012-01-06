@@ -33,7 +33,7 @@ class HangmanCheater(object):
 		possibleWords = []
 		for word in self.dictionary:
 			if self.__stringContainsAny(word, self.impossibleChars):
-				continue #do bother if the word contains black listed chars
+				continue #don't bother if the word contains black listed chars
 			if self.__isPossible(self.pattern, word):
 				possibleWords.append(word)
 		return possibleWords
@@ -58,3 +58,17 @@ class HangmanCheater(object):
 			if char in str:
 				return True
 		return False
+
+class guessSuggestion(object):
+	@classmethod
+	def getBestChar(self, possibleWords):
+		if type(possibleWords) is not list and type(possibleWords) is not str:
+			raise TypeError("Argument must be a list or a string")
+		
+		charFreq = {}
+		for char in ''.join(possibleWords):
+			if char in charFreq.keys():
+				charFreq[char] = charFreq.get(char) + 1
+			else:
+				charFreq[char] = 1
+		return max(charFreq, key = charFreq.get)
